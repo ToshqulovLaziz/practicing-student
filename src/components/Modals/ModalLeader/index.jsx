@@ -2,6 +2,7 @@ import { Modal, Button, Form, Input, DatePicker, Select, Col, Row } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalLeader } from "../../../redux/modalSlice";
 import { setValuesLeader } from "../../../redux/valuesSlice";
+import { supabase } from "../../../tools/supabaseClient";
 
 const { Option } = Select;
 
@@ -11,14 +12,42 @@ const ModalLeader = () => {
     (state) => state.modal || { modalLeader: false }
   );
   const prefixSelector = "+998";
-  const onFinish = (values) => {
+  const [form] = Form.useForm();
+  const onFinish = async (values) => {
     const formattedValues = {
       ...values,
-      date: values.date?.toISOString(),
+      date: values.date?.format("YYYY-MM-DD"),
     };
-    dispatch(setValuesLeader(formattedValues));
-    dispatch(setModalLeader());
+
+    try {
+      const { data, error } = await supabase.from("create_leader_info").insert([
+        {
+          first_name: formattedValues.firstName,
+          last_name: formattedValues.lastName,
+          fathers_name: formattedValues.fathersName,
+          date_of_birth: formattedValues.date,
+          gender: formattedValues.gender,
+          specialty: formattedValues.specialty,
+          level: formattedValues.level,
+          location: formattedValues.location,
+          phone: formattedValues.phone,
+          attached_group: formattedValues.attachedGroup,
+          login: formattedValues.login,
+          password: formattedValues.password,
+        },
+      ]);
+
+      if (error) throw error;
+      console.log("Data inserted:", data);
+      form.resetFields();
+      dispatch(setValuesLeader(data));
+      dispatch(setModalLeader()); 
+    } catch (error) {
+      console.error("Error inserting data:", error.message);
+      alert("An error occurred: " + error.message);
+    }
   };
+
   return (
     <>
       <Modal
@@ -28,7 +57,11 @@ const ModalLeader = () => {
         width={1000}
       >
         <div className="w-[90%] mx-auto">
-          <Form className="pt-[30px]" onFinish={(values) => onFinish(values)}>
+          <Form
+            className="pt-[30px]"
+            onFinish={(values) => onFinish(values)}
+            form={form}
+          >
             <Row gutter={40}>
               <Col span={12}>
                 <Form.Item
@@ -58,7 +91,7 @@ const ModalLeader = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please complete the Last name!",
+                      message: "Please complete the Father's name!",
                     },
                   ]}
                 >
@@ -83,16 +116,16 @@ const ModalLeader = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please complete the Last name!",
+                      message: "Please complete the Gender!",
                     },
                   ]}
                 >
                   <Select
-                    className="custom-select my-[3px]"
+                    className="w-full custom-select my-[3px]"
                     placeholder="Gender"
                   >
                     <Option value="male">Male</Option>
-                    <Option value="female">female</Option>
+                    <Option value="female">Female</Option>
                   </Select>
                 </Form.Item>
                 <Form.Item
@@ -184,6 +217,7 @@ const ModalLeader = () => {
               type="primary"
               className="block px-[40px] h-[40px] font-medium tracking-[1.3px] mx-auto text-[18px]"
               htmlType="submit"
+
             >
               Submit
             </Button>
