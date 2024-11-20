@@ -157,3 +157,9 @@
     text-decoration: none;
     color: inherit;
   }
+  .custom-datepicker .ant-picker-input input::placeholder {
+    font-size: 18px; 
+  }
+  .custom-select .ant-select-selector {
+    font-size: 18px; 
+  }

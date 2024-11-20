@@ -1,5 +1,11 @@
+import Dashboard from "./Dashboard";
+
 const University = () => {
-  return <div>University</div>;
+  return (
+    <>
+      <Dashboard />
+    </>
+  );
 };
 
 export default University;

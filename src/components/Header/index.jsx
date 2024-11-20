@@ -1,13 +1,31 @@
 import { PiStudent } from "react-icons/pi";
 import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 const Header = () => {
-  const now = new Date();
+  const [currentDate, setCurrentDate] = useState("");
+  const [currentTime, setCurrentTime] = useState("");
 
-  const date = now.toISOString().split("T")[0];
-  const formattedDate = date.split("-").reverse().join(":");
+  useEffect(() => {
+    const updateDateTime = () => {
+      const now = new Date();
 
-  const time = now.toTimeString().split(" ")[0];
+      const date = now.toISOString().split("T")[0];
+      const formattedDate = date.split("-").reverse().join(".");
+
+      const time = now.toTimeString().split(" ")[0];
+
+      setCurrentDate(formattedDate);
+      setCurrentTime(time);
+    };
+
+    updateDateTime();
+
+    const intervalId = setInterval(updateDateTime, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
   return (
     <>
       <header className="py-[16px] bg-[#ECECF1]">
@@ -23,14 +41,14 @@ const Header = () => {
               <div className="text-end">
                 <p className="mb-0 font-normal text-[14px]">Server vaqti</p>
                 <span className="font-semibold text-[13px] mt-0 tracking-[1.3px]">
-                  <span>{formattedDate}</span> |
-                  <time className="pl-1" dateTime={time}>
-                    {time}
+                  <span>{currentDate}</span> |
+                  <time className="pl-1" dateTime={currentTime}>
+                    {currentTime}
                   </time>
                 </span>
               </div>
               <Link>
-                <RxAvatar className="text-[50px]"/>
+                <RxAvatar className="text-[50px]" />
               </Link>
             </div>
           </div>
