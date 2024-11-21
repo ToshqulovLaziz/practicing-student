@@ -28,7 +28,7 @@ const Header = () => {
   }, []);
   return (
     <>
-      <header className="py-[16px] bg-[#ECECF1]">
+      <header className="py-[16px] bg-[#ECECF1] sticky top-0 z-50">
         <div className="container max-w-full px-4 mx-auto">
           <div className="flex justify-between">
             <div className="flex items-center gap-1">
