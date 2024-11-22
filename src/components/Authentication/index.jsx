@@ -1,11 +1,9 @@
 import Login from "./Login";
-import Register from "./Register";
-
-const Authentication = () => {
+// eslint-disable-next-line react/prop-types
+const Authentication = ({ onLoginSuccess }) => {
   return (
     <>
-      <Login />
-      <Register />
+      <Login onLoginSuccess={onLoginSuccess} />
     </>
   );
 };

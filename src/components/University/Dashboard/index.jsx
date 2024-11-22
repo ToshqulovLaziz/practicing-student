@@ -7,7 +7,6 @@ import { PiStudent } from "react-icons/pi";
 import { GrGroup } from "react-icons/gr";
 import LeaderUniver from "./LeaderUniver";
 import StudentUniver from "./StudentUniver";
-import Chat from "../../Chat";
 import CalendarPage from "../../Calendar";
 import FormedGroup from "./FormedGroup";
 import Home from "./Home";
@@ -85,7 +84,6 @@ const Dashboard = () => {
                 <Route path="/leader/univer" element={<LeaderUniver />} />
                 <Route path="/student/univer" element={<StudentUniver />} />
                 <Route path="/groups/univer" element={<FormedGroup />} />
-                <Route path="/chat/univer" element={<Chat />} />
                 <Route path="/calendar/univer" element={<CalendarPage />} />
               </Routes>
             </div>
