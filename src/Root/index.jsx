@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Modals from "../components/Modals";
 import University from "../components/University";
@@ -6,10 +7,21 @@ import Authentication from "../components/Authentication";
 
 const Root = () => {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-  // This function will be passed down as a prop
+  useEffect(() => {
+    // Foydalanuvchini localStorage orqali tekshirish
+    const user = JSON.parse(localStorage.getItem("user"));
+    const role = localStorage.getItem("role");
+
+    if (user && role === "admin") {
+      setIsAdminLoggedIn(true);
+    }
+  }, []);
+
   const handleLoginSuccess = () => {
-    setIsAdminLoggedIn(true); // This updates the login state when login is successful
+    setIsAdminLoggedIn(true);
+    navigate("/dashboard"); // Tizimga kirgandan so‘ng, dashboardga yo'naltirish
   };
 
   return (

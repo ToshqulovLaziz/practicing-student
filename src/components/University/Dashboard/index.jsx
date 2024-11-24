@@ -3,6 +3,7 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { GoPerson } from "react-icons/go";
 import { IoChatboxOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
+import { GrOrganization } from "react-icons/gr";
 import { PiStudent } from "react-icons/pi";
 import { GrGroup } from "react-icons/gr";
 import LeaderUniver from "./LeaderUniver";
@@ -10,6 +11,7 @@ import StudentUniver from "./StudentUniver";
 import CalendarPage from "../../Calendar";
 import FormedGroup from "./FormedGroup";
 import Home from "./Home";
+import AddOrganization from "./AddOrganization";
 
 const Dashboard = () => {
   return (
@@ -30,7 +32,7 @@ const Dashboard = () => {
                   UNIVERSITY
                 </h3>
               </div>
-              <div className="flex flex-col gap-3 pl-[65px]  pt-[20px]">
+              <div className="flex flex-col gap-4 pl-[65px]  pt-[20px]">
                 <Link
                   className="flex items-center gap-3 hover:text-[#beb5b5]"
                   to="/leader/univer"
@@ -47,6 +49,15 @@ const Dashboard = () => {
                   <PiStudent className="text-[22px]" />
                   <span className="font-normal text-[18px] tracking-[1.3px]">
                     Students
+                  </span>
+                </Link>
+                <Link
+                  className="flex items-center gap-3 hover:text-[#beb5b5]"
+                  to="/add/organization"
+                >
+                  <GrOrganization className="text-[22px]" />
+                  <span className="font-normal text-[18px] tracking-[1.3px]">
+                    Organizations
                   </span>
                 </Link>
                 <Link
@@ -85,6 +96,7 @@ const Dashboard = () => {
                 <Route path="/student/univer" element={<StudentUniver />} />
                 <Route path="/groups/univer" element={<FormedGroup />} />
                 <Route path="/calendar/univer" element={<CalendarPage />} />
+                <Route path="/add/organization" element={<AddOrganization />} />
               </Routes>
             </div>
           </div>

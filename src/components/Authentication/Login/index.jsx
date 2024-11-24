@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // React Router uchun
 import { supabase } from "../../../tools/supabaseClient";
 import { Form, Input, Button, message } from "antd";
 import { MdOutlineMailOutline } from "react-icons/md";
@@ -7,6 +8,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 // eslint-disable-next-line react/prop-types
 const Login = ({ onLoginSuccess }) => {
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const onFinish = async ({ email, password }) => {
     try {
@@ -23,6 +25,7 @@ const Login = ({ onLoginSuccess }) => {
 
       const user = data.user;
 
+      // User role metadata
       const { data: metadata, error: metadataError } = await supabase
         .from("users")
         .select("role")
@@ -35,7 +38,15 @@ const Login = ({ onLoginSuccess }) => {
         return;
       }
 
+      // Saqlash localStorage-ga
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("role", metadata.role);
+
+      message.success("Tizimga muvaffaqiyatli kirdingiz!");
       onLoginSuccess();
+
+      // Foydalanuvchini dashboard sahifasiga yo‘naltirish
+      navigate("/dashboard");
     } catch (err) {
       message.error("Noma’lum xato yuz berdi. Qaytadan urinib ko‘ring.", err);
     }

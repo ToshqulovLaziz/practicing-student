@@ -36,7 +36,6 @@ const ModalStudent = () => {
       ]);
 
       if (error) throw error;
-      console.log("Data inserted:", data);
       form.resetFields();
       dispatch(setValuesLeader(data));
       dispatch(setModalStudent());

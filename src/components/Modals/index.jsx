@@ -1,4 +1,5 @@
 import ModalLeader from "./ModalLeader";
+import ModalOrganization from "./ModalOrganization";
 import ModalStudent from "./ModalStudent";
 
 const Modals = () => {
@@ -6,6 +7,7 @@ const Modals = () => {
     <>
       <ModalLeader />
       <ModalStudent />
+      <ModalOrganization />
     </>
   );
 };

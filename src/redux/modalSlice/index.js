@@ -2,7 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const modalSlice = createSlice({
   name: "modal",
-  initialState: { modalLeader: false, modalStudent: false },
+  initialState: {
+    modalLeader: false,
+    modalStudent: false,
+    modalOragnization: false,
+  },
   reducers: {
     setModalLeader(state) {
       state.modalLeader = !state.modalLeader;
@@ -10,8 +14,11 @@ const modalSlice = createSlice({
     setModalStudent(state) {
       state.modalStudent = !state.modalStudent;
     },
+    setModalOragnization(state) {
+      state.modalOragnization = !state.modalOragnization;
+    },
   },
 });
 
 export default modalSlice.reducer;
-export const { setModalLeader, setModalStudent} = modalSlice.actions;
+export const { setModalLeader, setModalStudent, setModalOragnization } = modalSlice.actions;
