@@ -1,7 +1,7 @@
 import { PiStudent } from "react-icons/pi";
-import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import TuitLogo from "../../assets/tuit.png"
 
 const Header = () => {
   const [currentDate, setCurrentDate] = useState("");
@@ -48,7 +48,7 @@ const Header = () => {
                 </span>
               </div>
               <Link to="/profile">
-                <RxAvatar className="text-[50px]" />
+              <img src={TuitLogo} alt="Tuit logo" width={55}/>
               </Link>
             </div>
           </div>
