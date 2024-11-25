@@ -12,6 +12,7 @@ import CalendarPage from "../../Calendar";
 import FormedGroup from "./FormedGroup";
 import Home from "./Home";
 import AddOrganization from "./AddOrganization";
+import Profile from "./Profile";
 
 const Dashboard = () => {
   return (
@@ -97,6 +98,7 @@ const Dashboard = () => {
                 <Route path="/groups/univer" element={<FormedGroup />} />
                 <Route path="/calendar/univer" element={<CalendarPage />} />
                 <Route path="/add/organization" element={<AddOrganization />} />
+                <Route path="/profile" element={<Profile />} />
               </Routes>
             </div>
           </div>

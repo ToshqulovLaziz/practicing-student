@@ -47,7 +47,7 @@ const Header = () => {
                   </time>
                 </span>
               </div>
-              <Link>
+              <Link to="/profile">
                 <RxAvatar className="text-[50px]" />
               </Link>
             </div>
